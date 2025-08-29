@@ -26,7 +26,7 @@ public class CorsConfig {
         CorsConfiguration cfg = new CorsConfiguration();
 
         // Allow requests only from your React frontend (localhost:3000)
-        cfg.setAllowedOrigins(List.of("http://localhost:3000"));
+        cfg.setAllowedOrigins(List.of("http://localhost:3000", "https://media-tracker-app-project.vercel.app/"));
 
         // Allow these HTTP methods from the frontend
         cfg.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
