@@ -142,5 +142,3 @@ npm start
 - <img src="https://img.icons8.com/ios-glyphs/32/github.png" height="20" width="20"/> GitHub: [GitHub](https://github.com/abdullaabdulla97)
 
 ---
-
----
