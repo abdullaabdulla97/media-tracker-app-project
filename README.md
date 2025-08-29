@@ -6,9 +6,9 @@ Users can **sign up / log in**, search for movies & shows (via TMDB API), and or
 ---
 
 ## 🌐 Live Demo
-- 👉 **Frontend:** [View Website Live]()
-- 👉 **Backend API:** []()
-
+- 👉 **Frontend:** [View Website Live](https://media-tracker-app-project.vercel.app/)
+- 👉 **Backend API:** [Backend API Server](https://media-tracker-app-project.onrender.com)
+- 
 ---
 
 ## 🚀 Features
