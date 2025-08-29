@@ -71,9 +71,11 @@ DB_PASS=your_db_password
 
 # 4. Run the backend
 mvnw spring-boot:run
+```
 
 ### 🎨 Frontend (React)
 
+```bash
 #1. Navigate to frontend
 cd ../Frontend
 
@@ -85,6 +87,7 @@ echo "REACT_APP_TMDB_API_KEY=your_tmdb_api_key_here" > .env
 
 # 4. Start the development server
 npm start
+```
 ---
 
 ## 📡 API Endpoints (Backend)
