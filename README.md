@@ -1,4 +1,4 @@
-# 🎬 Movie Tracker App
+# 🎬 Media Tracker App
 
 A full-stack **movie and TV show tracking application** built with **React (frontend)** and **Spring Boot + PostgreSQL (backend)**.  
 Users can **sign up / log in**, search for movies & shows (via TMDB API), and organize their **Watchlist, Favourites, and Watched** collections.
