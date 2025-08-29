@@ -1,0 +1,643 @@
+/* General layout & defaults Start */
+
+/* Base page styles: dark background + sans-serif font */
+body {
+    background: rgb(36, 36, 36);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* App-level CSS variables to keep navbar height and sidebar width consistent */
+.media-app-layout {
+    --navbar-h: 57.5px;
+    --sidebar-w: 324.5px;
+}
+
+/* Push main content down so it doesn’t sit under the fixed navbar */
+.media-app-layout > .main-layout {
+    padding-top: var(--navbar-h);
+}
+
+/* Main content area when sidebar is visible:
+   - leave space on the left for the sidebar
+   - fill the remaining width
+*/
+.media-app-layout > .main-layout > main {
+    margin-left: var(--sidebar-w);
+    width: calc(100% - var(--sidebar-w));
+    margin-top: 0;
+    padding: 0;
+}
+
+/* Full-width main content when sidebar is hidden (e.g., login/register routes) */
+.media-app-layout > .main-layout > main.no-sidebar {
+    margin-left: 0;
+    width: 100%;
+}
+
+/* General layout & defaults End*/
+
+
+/*NavBar (header) Start*/
+
+.navbar {
+    /* Horizontal layout with spacing */
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+    /* Padding + dark translucent background + soft shadow */
+    padding: 10px 55px;
+    background: rgba(0, 0, 0, 0.904);
+    box-shadow: 0px 5px 80px rgba(0, 0, 0, 0.1);
+
+    /* Fixed at top across the page, above other elements */
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 1000;
+}
+
+/* Search form takes available space */
+.navbar form {
+    flex: 1;
+    display: flex;
+    max-width: 1000px;
+    position: relative; /* for the search icon positioning */
+}
+
+/* Search input visual style */
+.navbar form input[type="text"] {
+    width: 80%;
+    padding: 12px 14px 12px 40px; /* left padding leaves room for the icon */
+    border: 1px solid rgba(128, 128, 128, 0.338);
+    background: rgba(128, 128, 128, 0.338);
+    color: white;
+    border-radius: 20px;
+    outline: none;
+    cursor: pointer;
+    font-size: 17px;
+    transition: background 0.2s, color 0.2s;
+}
+
+/* On hover, invert colors for a “focus” feel */
+.navbar form input[type="text"]:hover {
+    background: white;
+    color: black;
+}
+
+/* Placeholder color (default state) */
+.navbar form input::placeholder {
+    color: white;
+    opacity: 0.7;
+}
+
+/* Placeholder turns gray on hover */
+.navbar form input:hover::placeholder {
+    color: gray;
+}
+
+/* Magnifying glass icon positioned inside the input */
+.navbar-search-icon {
+    position: absolute;
+    left: 12px;
+    top: 29%;
+    height: 20px;
+    width: 20px;
+    color: white;
+}
+
+/* Navbar links: white by default, bold, no underline */
+.navbar a {
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.2s, background 0.2s, opacity 0.2s;
+}
+
+/* Hover accent color */
+.navbar a:hover {
+    color: red;
+}
+
+/* Sign-up button style (CTA) */
+.navbar-register {
+    background: #7b3fe4;
+    color: white;
+    padding: 10px 16px;
+    border-radius: 10px;
+    margin-left: 6px;
+    font-weight: 700;
+}
+.navbar-register:hover {
+    background: white; /* contrast hover */
+}
+
+/* User menu (avatar + name + dropdown) */
+.navbar-user {
+    position: relative; /* to place the dropdown menu */
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 8px;
+    border-radius: 10px;
+    cursor: default;
+    outline: none;
+    transition: background 0.2s ease;
+}
+
+/* Light background on hover/focus to indicate interactivity */
+.navbar-user:hover,
+.navbar-user:focus-within {
+    background: white;
+}
+
+/* Username label in the header */
+.navbar-user-name {
+    color: white;
+    font-weight: 700;
+}
+
+/* Avatar + caret */
+.navbar-profile-icon { width: 28px; height: 28px; }
+.navbar-dropdown-icon { width: 20px; height: 20px; }
+
+/* Invert colors when parent is hovered/focused */
+.navbar-user:hover .navbar-user-name,
+.navbar-user:focus-within .navbar-user-name {
+    color: black;
+}
+.navbar-user:hover .navbar-dropdown-icon,
+.navbar-user:focus-within .navbar-dropdown-icon {
+    transform: rotate(180deg);
+    filter: brightness(0) invert(0);
+}
+
+/* Dropdown panel: hidden by default (opacity 0 + disabled pointer events) */
+.navbar-user-menu {
+    position: absolute;
+    right: 0;
+    top: calc(100% + 1px);
+    min-width: 145px;
+    background: white;
+    border: 1px solid black;
+    border-radius: 12px;
+    opacity: 0;
+    transform: translateY(-6px) scale(0.98);
+    pointer-events: none;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    padding: 5px;
+    z-index: 1000;
+}
+
+/* Reveal dropdown on hover/focus of the trigger container */
+.navbar-user:hover .navbar-user-menu,
+.navbar-user:focus-within .navbar-user-menu {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    pointer-events: auto;
+}
+
+/* Dropdown items (buttons) */
+.navbar-menu-item {
+    width: 100%;
+    text-align: left;
+    padding: 10px 12px;
+    background: transparent;
+    border: 0;
+    border-radius: 8px;
+    color: black;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+}
+.navbar-menu-item:hover {
+    color: red;
+}
+
+/* NavBar End */
+
+
+/* SideBar Start*/
+
+.sidebar-container {
+    /* Fixed vertical sidebar on desktop */
+    position: fixed;
+    top:65.8px; /* sits below the fixed navbar */
+    left: 0; right: 0;
+    align-self: flex-start;
+    width: 300px;
+    background: rgb(36, 36, 36);
+    border-right: 1px solid black;
+    padding: 16px 16px 522px; /* vertical body space */
+    color: white;
+    z-index: 1000;
+}
+
+/* Large section title (“Movies” / “TV Shows”) */
+.sidebar-title {
+    font-size: 40px;
+    font-weight: 800;
+    margin: 6px 6px 40px;
+    color: white;
+}
+
+/* Label above the category buttons */
+.sidebar-section-label {
+    font-size: 14px;
+    font-weight: 800;
+    color: #9a9a9a;
+    margin: 10px 6px 8px;
+}
+
+/* Category buttons (Trending / Popular / Top Rated) */
+.category-container .sidebar-item {
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 10px 12px;
+    margin: 2px 4px;
+    background: transparent;
+    border: 0;
+    color: white;
+    font-size: 20px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s, transform 0.1s;
+}
+.category-container .sidebar-item:hover {
+    text-decoration: underline;
+}
+/* Active category gets red text and is non-clickable */
+.category-container .sidebar-item[disabled] {
+    color: red;
+    cursor: default;
+}
+
+/* SideBar End */
+
+
+/* Entertainment list + pager Start */
+
+/* Responsive grid for cards (4 columns on desktop) */
+.entertainement-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Pager bar under the grid */
+.entertainement-page {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 12px;
+    border-top: 1px solid rgba(128, 128, 128, 0.313);
+}
+.entertainement-page-status {
+    color: white;
+    font-size: 14px;
+}
+.entertainement-page button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: white;
+}
+.entertainement-page button:hover {
+    opacity: 0.4;
+    text-decoration: underline;
+}
+.entertainement-page button:disabled {
+    cursor: not-allowed;
+    opacity: 0.4;
+}
+
+/* Entertainment list + pager End */
+
+
+/* Media Card Start */
+
+.media-card {
+    background: rgb(36, 36, 36);
+    border: 1px solid rgba(128, 128, 128, 0.313);
+}
+
+/* Poster image fills the card width and has fixed height */
+.media-image {
+    width: 100%;
+    height: 400px;
+    display: block; /* remove inline gap */
+}
+
+/* Bottom gradient overlay with title + year */
+.media-overlay {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    color: white;
+    height: 140px;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.523) 100%)
+}
+
+.media-title {
+    margin: 0;
+    font-size: 20px;
+    word-wrap: break-word;
+}
+
+.media-year {
+    font-size: 14px;
+    opacity: 0.8;
+}
+
+/* Action buttons (Watched / Watchlist / Favourite) share a similar pattern */
+.media-action-watched,
+.media-action-watchlist,
+.media-action-favourite {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+.media-action-watched > img,
+.media-action-watchlist > img,
+.media-action-favourite > img {
+    width: 32px;
+    height: 32px;
+}
+
+/* Subtle colored hover backgrounds */
+.media-action-watched:hover   { background: rgba(0, 128, 0, 0.555);   border-radius: 14px; }
+.media-action-watchlist:hover { background: rgba(173, 216, 230, 0.477); border-radius: 14px; }
+.media-action-favourite:hover { background: rgba(255, 0, 0, 0.461);   border-radius: 14px; }
+
+/* MediaCard End */
+
+
+/* Shared page container UI */
+
+.container { color: white; }
+.container > h2 { margin-left: 10px; }
+.description { margin-left: 10px; }
+.filter-section {
+    margin-bottom: 30px;
+    margin-left: 10px;
+}
+
+
+/* Auth forms (login/reg) Start */
+
+/* Outer wrappers: ensure forms sit below navbar and are centered */
+.signin-wrapper, .signup-wrapper {
+    min-height: calc(100vh - 66px);
+    padding: 90px 16px 40px;
+    display: grid;
+    place-items: start center;
+}
+
+/* Card container + visual style */
+.signin-card, .signup-card {
+    width: 100%;
+    max-width: 450px;
+    background: white;
+    border: 1px solid rgba(0, 0, 0, 0.374);
+    border-radius: 12px;
+    box-shadow: 0 6px 28px rgba(0, 0, 0, 0.338);
+    padding: 80px 28px 80px;
+    display: grid;
+    gap: 25px;
+}
+
+/* Headings */
+.signin-title, .signup-title {
+    margin: 0 0 8px;
+    font-size: 20px;
+    font-weight: 800;
+    color: black;
+    text-align: center;
+}
+
+/* Inputs */
+.signin-input, .signup-input {
+    width: 400px;
+    height: 20px;
+    padding: 10px 12px;
+    border: 1px solid rgba(0, 0, 0, 0.374);
+    border-radius: 8px;
+    color: black;
+    font-size: 15px;
+    outline: none;
+}
+
+/* Placeholder tone */
+.signin-input::placeholder, .signup-input::placeholder {
+    color: rgba(0, 0, 0, 0.418);
+    font-size: 20px;
+}
+
+/* Focus ring highlight */
+.signin-input:focus, .signup-input:focus {
+    box-shadow: 0 0 3px 1px rgba(0, 0, 255, 0.498);
+}
+
+/* Error/info message style */
+.signin-message, .signup-message {
+    margin-top: 4px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    color: #b42318;
+    border: 1px solid #ffd6d6;
+    font-size: 14px;
+}
+
+/* Primary submit buttons */
+.signin-btn, .signup-btn {
+    margin-top: 8px;
+    height: 48px;
+    border: none;
+    border-radius: 10px;
+    background: #8e44ff;
+    color: white;
+    font-weight: 900;
+    font-size: 16px;
+    cursor: pointer;
+}
+.signin-btn:hover, .signup-btn:hover {
+    background: white;
+    color: red;
+    border: 1px solid rgba(0, 0, 0, 0.374);
+}
+
+/* Footer text + link styles */
+.signin-footer, .signup-footer {
+    margin-top: 6px;
+    text-align: center;
+    color: black;
+    font-size: 14px;
+}
+.signin-link, .signup-link {
+    color: #8e44ff;
+    font-weight: 700;
+    text-decoration: none;
+}
+.signin-link:hover, .signup-link:hover {
+    text-decoration: underline;
+    color: rgba(255, 0, 0, 0.575);
+}
+
+/* Icon positioning inside input rows */
+.icon-wrapper { position: relative; }
+.icon {
+    position: absolute;
+    left: 12px;
+    top: 42%;
+    transform: translateY(-50%);
+    color: black;
+}
+/* Extra left padding to make room for the icon */
+.icon-wrapper .signin-input, .icon-wrapper .signup-input {
+    padding-left: 38px;
+}
+
+/* Auth forms (login/reg) End */
+
+
+
+/* Hamburger / menu Start */
+
+/* Hidden on desktop, shown via media query on small screens */
+.navbar-burger {
+    display: none;
+    background: transparent;
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 6px;
+    border-radius: 8px;
+}
+
+/* Horizontal link row on desktop */
+.navbar-links {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+/* Hamburger / menu End */
+
+
+/* Responsive adjustments Start */
+
+@media (max-width: 1000px) {
+    /* Collapse sidebar width variable for smaller screens */
+    .media-app-layout {
+        --sidebar-w: 0;
+    }
+
+    /* Show the burger button on mobile */
+    .navbar-burger {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* Tighter navbar spacing on mobile */
+    .navbar {
+        gap: 12px;
+        padding: 10px 16px;
+    }
+
+    /* Narrower search input on mobile */
+    .navbar form input[type="text"] {
+        width: 60%;
+    }
+
+    /* Mobile dropdown panel for the nav links */
+    .navbar-links {
+        position: fixed;
+        left: 0; right: 0;
+        top: var(--navbar-h);
+        background: rgba(0, 0, 0, 0.838);
+        border-bottom: 1px solid black;
+
+        /* Hidden by default; toggled by .is-open class */
+        display: none;
+        flex-direction: column;
+        padding: 10px 16px;
+        gap: 10px;
+        z-index: 1000;
+    }
+    .navbar-links.is-open { display: flex; }
+
+    /* Make links full-width in the mobile menu */
+    .navbar .navbar-links > a,
+    .navbar .navbar-links > .navbar-user,
+    .navbar .navbar-links > .navbar-login,
+    .navbar .navbar-links > .navbar-register {
+        width: 100%;
+    }
+
+    /* Stretch dropdown to menu width */
+    .navbar-user-menu { width: 99%; }
+
+    /* Sidebar becomes a sticky horizontal bar on mobile */
+    .sidebar-container {
+        position: sticky;
+        left: 0; right: 0;
+        width: 100%;
+        overflow: hidden;
+        background: rgb(36, 36, 36);
+        border-right: none;
+        border-bottom: 1px solid black;
+        z-index: 900;
+        padding: 0 0;
+        display: flex;
+        align-items: center;
+        white-space: nowrap;
+    }
+
+    /* Adjust label/button positions when compact */
+    .sidebar-section-label { position: relative; right: 130px; }
+    .category-container .sidebar-item {
+        position: relative;
+        right: 130px;
+        font-size: 16px;
+    }
+
+    .sidebar-title {
+        display: block;
+        font-size: 32px;
+        margin-bottom: 100px;
+    }
+
+    /* Categories line up horizontally on mobile */
+    .category-container {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+    }
+
+    /* Card min width so they don’t collapse too small */
+    .media-card { min-width: 200px; }
+
+    /* Shorter overlay to fit smaller cards */
+    .media-overlay { height: 80px; }
+
+    /* 2-column grid on mobile */
+    .entertainement-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* Tighter auth card + inputs on mobile */
+    .signin-card, .signup-card {
+        max-width: 385px;
+        margin-top: 5px;
+        padding-bottom: 80px;
+        padding-top: 80px;
+    }
+    .signin-input, .signup-input {
+        width: 340px;
+    }
+
+    /* Responsive adjustments End */
+}
