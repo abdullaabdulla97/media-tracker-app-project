@@ -8,7 +8,6 @@ Users can **sign up / log in**, search for movies & shows (via TMDB API), and or
 ## 🌐 Live Demo
 - 👉 **Frontend:** [View Website Live](https://media-tracker-app-project.vercel.app/)
 - 👉 **Backend API:** [Backend API Server](https://media-tracker-app-project.onrender.com)
-- 
 ---
 
 ## 🚀 Features
@@ -66,8 +65,11 @@ createdb media_tracker
 
 # 3. Configure environment variables
 # In Backend/.env (example):
+DB_HOST=localhost
+DB_NAME=media_tracker
 DB_USER=your_db_username
 DB_PASS=your_db_password
+PORT=8080
 
 # 4. Run the backend
 mvnw spring-boot:run
@@ -82,8 +84,9 @@ cd ../Frontend
 # 2. Install dependencies
 npm install
 
-# 3. Create a .env file with your TMDB API key
+# 3. Create a .env file to add the TMDB API key and URL for localhost
 echo "REACT_APP_TMDB_API_KEY=your_tmdb_api_key_here" > .env
+echo "REACT_APP_API_BASE=http://localhost:8080" > .env
 
 # 4. Start the development server
 npm start
@@ -137,5 +140,7 @@ npm start
 - <img src="https://img.icons8.com/ios-glyphs/32/linkedin.png" height="20" width="20"/> LinkedIn: [LinkedIn](https://www.linkedin.com/in/abdulla-abdulla-350a0937b/)  
 - 📧 Email: abdulla.abdulla.salem97@gmail.com  
 - <img src="https://img.icons8.com/ios-glyphs/32/github.png" height="20" width="20"/> GitHub: [GitHub](https://github.com/abdullaabdulla97)
+
+---
 
 ---
