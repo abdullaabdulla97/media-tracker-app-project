@@ -44,7 +44,7 @@ Users can **sign up / log in**, search for movies & shows (via TMDB API), and or
 
 ## 📸 Screenshots
 
-| Home | NavBar | SideBar | Watchlist | Favourites| Watched | Sign | Sign Up |
+| Home | NavBar | SideBar | Watchlist | Favourites| Watched | Sign in | Sign Up |
 |---|---|---|---|---|---|---|---|
 | ![Home Screenshot](Frontend/public/screenshots/Home.png) | ![NavBar screenshot](Frontend/public/screenshots/NavBar.png) | ![SideBar screenshot](Frontend/public/screenshots/SideBar.png) | ![Watchlist screenshot](Frontend/public/screenshots/Watchlist.png) | ![Favourites screenshot](Frontend/public/screenshots/Favourites.png) | ![Watched screenshot](Frontend/public/screenshots/Watched.png) | ![Sign in screenshot](Frontend/public/screenshots/Sign-in.png) | ![Sign Up screenshot](Frontend/public/screenshots/Sign-Up.png) |
 
