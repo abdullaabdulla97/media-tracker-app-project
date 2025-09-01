@@ -157,8 +157,14 @@ body {
 }
 
 /* Avatar + caret */
-.navbar-profile-icon { width: 28px; height: 28px; }
-.navbar-dropdown-icon { width: 20px; height: 20px; }
+.navbar-profile-icon { 
+    width: 28px; 
+    height: 28px; 
+}
+.navbar-dropdown-icon { 
+    width: 20px; 
+    height: 20px; 
+}
 
 /* Invert colors when parent is hovered/focused */
 .navbar-user:hover .navbar-user-name,
@@ -367,9 +373,18 @@ body {
 }
 
 /* Subtle colored hover backgrounds */
-.media-action-watched:hover   { background: rgba(0, 128, 0, 0.555);   border-radius: 14px; }
-.media-action-watchlist:hover { background: rgba(173, 216, 230, 0.477); border-radius: 14px; }
-.media-action-favourite:hover { background: rgba(255, 0, 0, 0.461);   border-radius: 14px; }
+.media-action-watched:hover   { 
+    background: rgba(0, 128, 0, 0.555);   
+    border-radius: 14px; 
+}
+.media-action-watchlist:hover { 
+    background: rgba(173, 216, 230, 0.477); 
+    border-radius: 14px; 
+}
+.media-action-favourite:hover { 
+    background: rgba(255, 0, 0, 0.461);   
+    border-radius: 14px; 
+}
 
 /* MediaCard End */
 
@@ -567,7 +582,9 @@ body {
         gap: 10px;
         z-index: 1000;
     }
-    .navbar-links.is-open { display: flex; }
+    .navbar-links.is-open { 
+        display: flex; 
+    }
 
     /* Make links full-width in the mobile menu */
     .navbar .navbar-links > a,
@@ -578,7 +595,9 @@ body {
     }
 
     /* Stretch dropdown to menu width */
-    .navbar-user-menu { width: 99%; }
+    .navbar-user-menu { 
+        width: 99%; 
+    }
 
     /* Sidebar becomes a sticky horizontal bar on mobile */
     .sidebar-container {
@@ -618,10 +637,14 @@ body {
     }
 
     /* Card min width so they don’t collapse too small */
-    .media-card { min-width: 200px; }
+    .media-card { 
+        min-width: 200px; 
+    }
 
     /* Shorter overlay to fit smaller cards */
-    .media-overlay { height: 80px; }
+    .media-overlay { 
+        height: 80px; 
+    }
 
     /* 2-column grid on mobile */
     .entertainement-grid {
@@ -638,6 +661,135 @@ body {
     .signin-input, .signup-input {
         width: 340px;
     }
-
-    /* Responsive adjustments End */
 }
+
+@media (max-width: 480px) {
+    .navbar { 
+        gap: 10px; 
+        padding: 10px 12px; 
+    }
+
+    .navbar form input[type="text"] {
+        width: 100%;
+        font-size: 16px;
+        padding: 10px 14px 10px 38px;
+    }
+    .navbar-search-icon {
+        left: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        height: 18px; width: 18px;
+     }
+  
+    .navbar-links {
+        display: none;
+        position: fixed;
+        left: 0; right: 0;
+        top: var(--navbar-h);
+        padding: 10px 12px;
+        gap: 8px;
+        flex-direction: column;
+    }
+    .navbar-links.is-open { 
+        display: flex;
+    }
+    .navbar .navbar-links > a,
+    .navbar .navbar-links > .navbar-user,
+    .navbar .navbar-links > .navbar-login,
+    .navbar .navbar-links > .navbar-register { 
+        width: 100%; 
+    }
+  
+    .sidebar-container {
+        position: sticky;
+        top: var(--navbar-h);
+        width: 97%;
+        border-right: none;
+        padding: 8px 8px;
+        display: flex;
+        overflow-x: auto;
+        align-items: center;         
+        white-space: nowrap;
+    }
+    .sidebar-title { 
+        font-size: 24px; 
+        margin: 0 8px 35px 0; 
+    }
+    .sidebar-section-label { 
+        position: static;  
+        margin: 25px 0 10px -100px; 
+    }
+    .category-container { 
+        display: inline-flex; 
+        gap: 6px; 
+    }
+    .category-container .sidebar-item {
+        position: static;
+        font-size: 14px;
+        margin-top: 20px;
+        padding: 8px 10px;
+        border-radius: 8px;
+    }
+
+    .entertainement-grid { 
+        grid-template-columns: repeat(2,1fr); 
+    }
+
+    .media-card { 
+        min-width: 0; 
+    }
+    .media-image { 
+        height: 300px; 
+    }      
+    .media-overlay { 
+        height: 72px; 
+        gap: 8px; 
+    }
+
+    .media-title {
+        font-size: 14px;
+        line-height: 1.2;
+    }
+
+    .media-year { 
+        font-size: 12px; 
+    }
+
+    .media-action-watched > img,
+    .media-action-watchlist > img,
+    .media-action-favourite > img { 
+        width: 28px; 
+        height: 28px; 
+    }
+
+    .entertainement-page { 
+        padding: 10px 8px; 
+    }
+    .entertainement-page-status { 
+        font-size: 12px; 
+    }
+    .entertainement-page button { 
+        padding: 6px 8px; 
+    }
+
+    .signin-wrapper, .signup-wrapper { 
+        padding: 80px 12px 32px; 
+    }
+    .signin-card, .signup-card { 
+        max-width: 100%; 
+        padding: 56px 16px; 
+    }
+    .signin-input, .signup-input { 
+        width: 85%; 
+        font-size: 16px; 
+    }
+    .signin-input::placeholder, .signup-input::placeholder { 
+        font-size: 16px; 
+    }
+
+    .navbar-burger { 
+        display: inline-flex; 
+    }
+}
+
+ /* Responsive adjustments End */
