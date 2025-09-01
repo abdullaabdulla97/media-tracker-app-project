@@ -717,7 +717,7 @@ body {
     }
     .sidebar-section-label { 
         position: static;  
-        margin: 25px 0 10px -100px; 
+        margin: 25px 0 10px -70px; 
     }
     .category-container { 
         display: inline-flex; 
