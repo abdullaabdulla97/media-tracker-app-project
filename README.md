@@ -26,15 +26,14 @@ Users can **sign up / log in**, search for movies & shows (via TMDB API), and or
 
 ## 🛠️ Tech Stack
 ### Frontend
-- **React** (JavaScript, Hooks, Router)  
-- **TMDB API** (for fetching movies/shows data)  
-- **CSS** (custom responsive styling)
+- **React:** (JavaScript, Hooks, Router)  
+- **TMDB API:** for fetching movies/shows data [TMDB API](https://www.themoviedb.org/)  
+- **CSS:** (custom responsive styling)
 
 ### Backend
-- **Spring Boot** (Java, REST API)  
-- **PostgreSQL** (persistent storage)  
-- **Spring Data JPA** (database interactions)  
-- **Session-based Authentication**  
+- **Spring Boot:** (Java, REST API)  
+- **PostgreSQL:** (persistent storage)  
+- **Spring Data JPA:** (database interactions)  
 
 ### Deployment
 - **Frontend:** Vercel  
