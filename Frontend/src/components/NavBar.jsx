@@ -7,7 +7,7 @@ import {Link, useNavigate} from "react-router-dom";
 import React, {useState} from "react";
 
 // Import the "Menu" (hamburger) icon from lucide-react for mobile toggle button
-import {Menu} from "lucide-react";
+import {Menu, X} from "lucide-react";
 
 // Define the NavBar component. It receives props from AppLayout (in App.jsx):
 // - username: current logged-in username (empty if not logged in)
@@ -20,15 +20,20 @@ function NavBar ({username, setSearchQuery, setMediaType, onLogout}) {
     // navigate lets us programmatically redirect (e.g., to /search when search submitted)
     const navigate = useNavigate();
 
+    // navOpen tracks whether the mobile navigation menu is open (for small screens)
+    const [navOpen, setNavOpen] = useState(false);
+
+
     // Handle the search form submit
     function handleSearch(e) {
         e.preventDefault();          // Prevent full page reload
         setSearchQuery(input);       // Save the query into global state
         navigate("/search");         // Redirect user to the /search route
+        setNavOpen(false);           // Closes the menu after search
     }
 
-    // navOpen tracks whether the mobile navigation menu is open (for small screens)
-    const [navOpen, setNavOpen] = useState(false);
+    // Closes the menu when clicking a link (for mobile)
+    const closeMenu = () => setNavOpen(false);
 
     // JSX returned: the navigation bar structure
     return (
@@ -52,17 +57,17 @@ function NavBar ({username, setSearchQuery, setMediaType, onLogout}) {
                 navOpen toggles "is-open" class for mobile menu */}
             <div className={`navbar-links ${navOpen ? "is-open" : ""}`}>
                 {/* Movies link: also sets mediaType="movie" */}
-                <Link to="/" className="navbar-movies" onClick={() => setMediaType("movie")}>
+                <Link to="/" className="navbar-movies" onClick={() => { setMediaType("movie"); closeMenu(); }}>
                   Movies
                 </Link>
                 {/* TV Shows link: also sets mediaType="tv" */}
-                <Link to="/" className="navbar-tv" onClick={() => setMediaType("tv")}>
+                <Link to="/" className="navbar-tv" onClick={() => { setMediaType("tv"); closeMenu(); }}>
                   TV Shows
                 </Link>
                 {/* User’s lists (require login, but links are always visible) */}
-                <Link to="/watchlist" className="navbar-watchlist">Watchlist</Link>
-                <Link to="/favourites" className="navbar-favourites">Favourites</Link>
-                <Link to="/watched" className="navbar-watched">Watched</Link>
+                <Link to="/watchlist" className="navbar-watchlist" onClick={closeMenu}>Watchlist</Link>
+                <Link to="/favourites" className="navbar-favourites" onClick={closeMenu}>Favourites</Link>
+                <Link to="/watched" className="navbar-watched" onClick={closeMenu}>Watched</Link>
             
                 {/* If username is truthy (logged in) show profile + logout menu */}
                 {username ? (
@@ -84,7 +89,7 @@ function NavBar ({username, setSearchQuery, setMediaType, onLogout}) {
                             {/* Logout button calls the onLogout function passed from App */}
                             <button 
                               className="navbar-menu-item" 
-                              onClick={onLogout} 
+                              onClick={() => { onLogout(); closeMenu();}} 
                               role="menuitem"
                             >
                               Sign Out
@@ -94,21 +99,21 @@ function NavBar ({username, setSearchQuery, setMediaType, onLogout}) {
                 ) : (
                   // If no user is logged in, show Sign In / Sign Up links
                   <>
-                    <Link to="/login" className="navbar-login">SIGN IN</Link>
-                    <Link to="/register" className="navbar-register">SIGN UP</Link>
+                    <Link to="/login" className="navbar-login" onClick={closeMenu}>SIGN IN</Link>
+                    <Link to="/register" className="navbar-register" onClick={closeMenu}>SIGN UP</Link>
                   </>
                 )}
             </div>
 
             {/* Mobile "burger" button to toggle navOpen */}
             <button
-                className="navbar-burger"
+                className={`navbar-burger ${navOpen ? "is-active" : ""}`} // Changes the style when active
                 type="button"
                 aria-label="Toggle menu"                    // Accessibility label
                 aria-expanded={navOpen ? "true" : "false"}  // Accessibility state
                 onClick={() => setNavOpen(v => !v)}         // Toggle navOpen on click
             >
-                <Menu size={22}/> {/* Lucide-react Menu (hamburger) icon */}
+                {navOpen ? <X size={22}/> : <Menu size={22}/>} {/* Lucide-react Menu (hamburger) icon and X icon when closing the menu */}
             </button>
         </nav>
     );
